@@ -54,6 +54,14 @@
     };
 }
 
+/// 字号
+- (SWLabel *(^)(CGFloat value))  sWordSize {
+    return ^ (CGFloat value) {
+        self.font = [UIFont systemFontOfSize:value];
+        return self;
+    };
+}
+
 /// 文本颜色
 - (SWLabel*(^)(UIColor *value)) sTextColor {
     return ^ (UIColor *value) {
@@ -63,8 +71,8 @@
 }
 
 /// 对齐方式
-- (SWLabel*(^)(NSInteger value)) sTextAlignment {
-    return ^ (NSInteger value) {
+- (SWLabel*(^)(NSTextAlignment value)) sTextAlignment {
+    return ^ (NSTextAlignment value) {
         self.textAlignment = value;
         return self;
     };
@@ -87,7 +95,7 @@
 }
 
 ///  换行方式
-- (SWLabel*(^)(NSInteger value)) sLineBreakMode {
+- (SWLabel*(^)(NSLineBreakMode value)) sLineBreakMode {
     return ^ (NSInteger value) {
         self.lineBreakMode = value;
         return self;
@@ -102,7 +110,7 @@
     };
 }
 
-/// 便宜尺寸
+/// 偏移尺寸
 - (SWLabel*(^)(CGSize value)) sShadowOffset {
     return ^ (CGSize value) {
         self.shadowOffset = value;
@@ -110,6 +118,20 @@
     };
 }
 
+- (SWLabel *(^)(CGFloat value)) sCornerRadius {
+    return ^ (CGFloat value) {
+        self.layer.cornerRadius = value;
+        self.clipsToBounds = true;
+        return self;
+    };
+}
+
+- (SWLabel *(^)(UIView *value)) sAddTo {
+    return ^ (UIView *value) {
+        [value addSubview:self];
+        return self;
+    };
+}
 
 @end
 
@@ -145,6 +167,14 @@
 - (SWButton*(^)(UIFont *value)) sFont {
     return ^ (UIFont *value) {
         self.titleLabel.font = value;
+        return self;
+    };
+}
+
+/// 字号
+- (SWButton *(^)(CGFloat value)) sWordSize {
+    return ^ (CGFloat value) {
+        self.titleLabel.font = [UIFont systemFontOfSize:value];
         return self;
     };
 }
@@ -222,16 +252,16 @@
 }
 
 /// 垂直布局
-- (SWButton*(^)(NSInteger value)) sContentVerticalAlignment {
-    return ^ (NSInteger value) {
+- (SWButton*(^)(UIControlContentHorizontalAlignment value)) sContentVerticalAlignment {
+    return ^ (UIControlContentHorizontalAlignment value) {
         self.contentHorizontalAlignment = value;
         return self;
     };
 }
 
 /// 水平布局
-- (SWButton*(^)(NSInteger value)) sContentHorizontalAlignment {
-    return ^ (NSInteger value) {
+- (SWButton*(^)(UIControlContentVerticalAlignment value)) sContentHorizontalAlignment {
+    return ^ (UIControlContentVerticalAlignment value) {
         self.contentVerticalAlignment = value;
         return self;
     };
@@ -269,6 +299,21 @@
     };
 }
 
+- (SWButton *(^)(CGFloat value)) sCornerRadius {
+    return ^ (CGFloat value) {
+        self.layer.cornerRadius = value;
+        self.clipsToBounds = true;
+        return self;
+    };
+}
+
+- (SWButton *(^)(UIView *value)) sAddTo {
+    return ^ (UIView *value) {
+        [value addSubview:self];
+        return self;
+    };
+}
+
 @end
 
 @implementation SWTextField
@@ -298,6 +343,14 @@
 - (SWTextField *(^)(UIFont *value)) sFont {
     return ^ (UIFont *value) {
         self.font = value;
+        return self;
+    };
+}
+
+/// 字号
+- (SWTextField *(^)(CGFloat value)) sWordSize {
+    return ^ (CGFloat value) {
+        self.font = [UIFont systemFontOfSize:value];
         return self;
     };
 }
@@ -338,30 +391,45 @@
     };
 }
 
-- (SWTextField *(^)(NSInteger value)) sBorderStyle {
-    return ^(NSInteger value) {
+- (SWTextField *(^)(UITextBorderStyle value)) sBorderStyle {
+    return ^(UITextBorderStyle value) {
         self.borderStyle = value;
         return self;
     };
 }
 
-- (SWTextField *(^)(NSInteger value)) sReturnKeyType {
-    return ^(NSInteger value) {
+- (SWTextField *(^)(UIReturnKeyType value)) sReturnKeyType {
+    return ^(UIReturnKeyType value) {
         self.returnKeyType = value;
         return self;
     };
 }
 
-- (SWTextField *(^)(NSInteger value)) sLeftViewMode {
-    return ^(NSInteger value) {
+- (SWTextField *(^)(UITextFieldViewMode value)) sLeftViewMode {
+    return ^(UITextFieldViewMode value) {
         self.leftViewMode = value;
         return self;
     };
 }
 
-- (SWTextField *(^)(NSInteger value)) sClearButtonMode {
-    return ^(NSInteger value) {
+- (SWTextField *(^)(UITextFieldViewMode value)) sClearButtonMode {
+    return ^(UITextFieldViewMode value) {
         self.clearButtonMode = value;
+        return self;
+    };
+}
+
+- (SWTextField *(^)(CGFloat value)) sCornerRadius {
+    return ^ (CGFloat value) {
+        self.layer.cornerRadius = value;
+        self.clipsToBounds = true;
+        return self;
+    };
+}
+
+- (SWTextField *(^)(UIView *value)) sAddTo {
+    return ^ (UIView *value) {
+        [value addSubview:self];
         return self;
     };
 }
@@ -402,6 +470,19 @@
         attributeBlock(button);
     }
     return button;
+}
+
+/// 快速创建textField
++ (UITextField *)speedCreatTextfieldWith:(void(^)(SWTextField *textField))attributeBlock {
+    SWTextField *textField = [[SWTextField alloc] init];
+    textField.placeholder = @"请输入...";
+    textField.frame = CGRectMake(0, 0, 100, 25);
+    textField.font = [UIFont systemFontOfSize:14];
+    textField.clearsOnBeginEditing = true;
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    textField.leftView = [UIView new];
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    return textField;
 }
 
 @end
