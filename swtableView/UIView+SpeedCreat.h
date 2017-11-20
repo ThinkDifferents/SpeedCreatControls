@@ -26,7 +26,8 @@
 
 /// 圆角 CGFloat
 - (SWLabel *(^)(CGFloat value)) sCornerRadius;          /// 加到父控件
-- (SWLabel *(^)(UIView *value)) sAddTo;
+- (SWLabel *(^)(UIView *value)) sAddTo;                 /// 完成block
+- (SWLabel *(^)(void(^value)(SWLabel *))) sCompleted;
 
 @end
 
@@ -56,7 +57,8 @@
 
 /// 圆角 CGFloat
 - (SWButton *(^)(CGFloat value)) sCornerRadius;          /// 加到父控件
-- (SWButton *(^)(UIView *value)) sAddTo;
+- (SWButton *(^)(UIView *value)) sAddTo;                 /// 完成block
+- (SWButton *(^)(void(^value)(SWButton *))) sCompleted;
 
 @end
 
@@ -79,7 +81,8 @@
 
 /// 圆角 CGFloat
 - (SWTextField *(^)(CGFloat value)) sCornerRadius;          /// 加到父控件
-- (SWTextField *(^)(UIView *value)) sAddTo;
+- (SWTextField *(^)(UIView *value)) sAddTo;                 /// 完成block
+- (SWTextField *(^)(void(^value)(SWTextField *))) sCompleted;
 
 @end
 

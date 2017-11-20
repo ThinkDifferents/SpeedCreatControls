@@ -32,7 +32,11 @@
         .sBackgroundColor([UIColor redColor])
         .sFrame(CGRectMake(10, 40, 60, 30))
         .sFont([UIFont systemFontOfSize:16])
-        .sTextColor([UIColor whiteColor]);
+        .sTextColor([UIColor whiteColor])
+        .sCompleted(^(UILabel *label){
+            NSLog(@"%@", label);
+        })
+        .sTextAlignment(NSTextAlignmentCenter);
     }];
     [self.grayView addSubview:label2];
     

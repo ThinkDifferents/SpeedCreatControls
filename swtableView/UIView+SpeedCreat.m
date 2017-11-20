@@ -133,6 +133,13 @@
     };
 }
 
+- (SWLabel *(^)(void (^)(SWLabel *)))sCompleted {
+    return ^(void (^value)(SWLabel *)) {
+        value(self);
+        return self;
+    };
+}
+
 @end
 
 @implementation SWButton
@@ -314,6 +321,13 @@
     };
 }
 
+- (SWButton *(^)(void (^)(SWButton *)))sCompleted {
+    return ^(void (^value)(SWButton *)) {
+        value(self);
+        return self;
+    };
+}
+
 @end
 
 @implementation SWTextField
@@ -430,6 +444,13 @@
 - (SWTextField *(^)(UIView *value)) sAddTo {
     return ^ (UIView *value) {
         [value addSubview:self];
+        return self;
+    };
+}
+
+- (SWTextField *(^)(void (^)(SWTextField *)))sCompleted {
+    return ^(void (^value)(SWTextField *)) {
+        value(self);
         return self;
     };
 }
